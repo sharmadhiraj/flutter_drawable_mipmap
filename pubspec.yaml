@@ -1,8 +1,7 @@
 name: flutter_drawable_mipmap
-description: Show drawable and mipmap from android in flutter app.
-version: 0.0.1
-author:
-homepage:
+description: Flutter plugin that provides custom widget to show drawable and mipmap from android.
+version: 1.0.1
+homepage: https://github.com/sharmadhiraj/flutter_drawable_mipmap
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

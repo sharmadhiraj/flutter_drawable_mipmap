@@ -1,45 +1,64 @@
 package com.sharmadhiraj.flutter_drawable_mipmap
 
-import androidx.annotation.NonNull;
-import io.flutter.embedding.engine.plugins.FlutterPlugin
+import android.graphics.Bitmap
+import android.graphics.Bitmap.CompressFormat.PNG
+import android.graphics.Bitmap.Config.ARGB_8888
+import android.graphics.Canvas
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import android.os.Build.VERSION.SDK_INT
+import android.os.Build.VERSION_CODES.N_MR1
+import androidx.annotation.NonNull
+import androidx.core.content.ContextCompat
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
-import io.flutter.plugin.common.PluginRegistry.Registrar
+import io.flutter.plugin.common.PluginRegistry
+import java.io.ByteArrayOutputStream
 
 /** FlutterDrawableMipmapPlugin */
-public class FlutterDrawableMipmapPlugin: FlutterPlugin, MethodCallHandler {
-  override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-    val channel = MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "flutter_drawable_mipmap")
-    channel.setMethodCallHandler(FlutterDrawableMipmapPlugin());
-  }
+class FlutterDrawableMipmapPlugin(private val registrar: PluginRegistry.Registrar) : MethodCallHandler {
 
-  // This static function is optional and equivalent to onAttachedToEngine. It supports the old
-  // pre-Flutter-1.12 Android projects. You are encouraged to continue supporting
-  // plugin registration via this function while apps migrate to use the new Android APIs
-  // post-flutter-1.12 via https://flutter.dev/go/android-project-migration.
-  //
-  // It is encouraged to share logic between onAttachedToEngine and registerWith to keep
-  // them functionally equivalent. Only one of onAttachedToEngine or registerWith will be called
-  // depending on the user's project. onAttachedToEngine or registerWith must both be defined
-  // in the same class.
-  companion object {
-    @JvmStatic
-    fun registerWith(registrar: Registrar) {
-      val channel = MethodChannel(registrar.messenger(), "flutter_drawable_mipmap")
-      channel.setMethodCallHandler(FlutterDrawableMipmapPlugin())
+    companion object {
+        @JvmStatic
+        fun registerWith(registrar: PluginRegistry.Registrar) {
+            val channel = MethodChannel(registrar.messenger(), "flutter_drawable_mipmap")
+            channel.setMethodCallHandler(FlutterDrawableMipmapPlugin(registrar))
+        }
     }
-  }
 
-  override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
-    if (call.method == "getPlatformVersion") {
-      result.success("Android ${android.os.Build.VERSION.RELEASE}")
-    } else {
-      result.notImplemented()
+    override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
+        if (call.method == "drawableMipmap") {
+            val name: String? = call.argument("name")
+            val isDrawable: Boolean = call.argument("is_drawable") ?: false
+            val id: Int = registrar.context().resources.getIdentifier(
+                    name,
+                    if (isDrawable) "drawable" else "mipmap",
+                    registrar.context().packageName
+            )
+            val drawable = ContextCompat.getDrawable(registrar.context(), id)
+            val byteArray = if (drawable == null) ByteArray(0) else drawableToByteArray(drawable)
+            result.success(byteArray)
+        } else {
+            result.notImplemented()
+        }
     }
-  }
 
-  override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
-  }
+    private fun drawableToByteArray(drawable: Drawable): ByteArray {
+        val bitmap = drawableToBitmap(drawable)
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(PNG, 100, stream)
+        return stream.toByteArray()
+    }
+
+    private fun drawableToBitmap(drawable: Drawable): Bitmap {
+        if (SDK_INT <= N_MR1) return (drawable as BitmapDrawable).bitmap
+        val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, ARGB_8888)
+        val canvas = Canvas(bitmap)
+        drawable.setBounds(0, 0, canvas.width, canvas.height)
+        drawable.draw(canvas)
+        return bitmap
+    }
+
 }

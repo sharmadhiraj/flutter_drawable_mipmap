@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/flutter_drawable_mipmap.iml" filepath="$PROJECT_DIR$/flutter_drawable_mipmap.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android/flutter_drawable_mipmap_android.iml" filepath="$PROJECT_DIR$/android/flutter_drawable_mipmap_android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/example/android/flutter_drawable_mipmap_example_android.iml" filepath="$PROJECT_DIR$/example/android/flutter_drawable_mipmap_example_android.iml" />
     </modules>
   </component>
 </project>

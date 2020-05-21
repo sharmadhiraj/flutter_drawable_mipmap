@@ -1,14 +1,22 @@
-# flutter_drawable_mipmap
+# Flutter Drawable Mipmap
 
-Show drawable and mipmap from android in flutter app.
+Flutter <a href="https://pub.dev/packages/flutter_drawable_mipmap" target="_blank">plugin</a> to show drawable and mipmap from android.
 
 ## Getting Started
+1. <a href="https://pub.dev/packages/flutter_drawable_mipmap#-installing-tab-" target="_blank">Installation Guide</a>
+2. <a href="https://pub.dev/packages/flutter_drawable_mipmap#-example-tab-" target="_blank">Example</a>
+<hr/>
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+##### Use this widget to show drawable in Flutter app
+```
+Drawable("name")
+```
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+##### Use this widget to show mipmap in Flutter app
+```
+Mipmap("name")
+```
+
+##### User only name of mipmap or drawable.  
+<small>R.drawable.ic_home => "ic_home"   
+R.mipmap.ic_menu => "ic_menu" </small>
