@@ -11,8 +11,25 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text("Flutter Drawable Mipmap"),
         ),
-        body: Column(
-          children: [Drawable("android"), Mipmap("ios")],
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                Container(
+                  child: Drawable("android"),
+                  width: 200,
+                  height: 200,
+                ),
+                SizedBox(height: 20),
+                Container(
+                  child: Mipmap("ios"),
+                  width: 200,
+                  height: 200,
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

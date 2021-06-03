@@ -18,7 +18,8 @@ import io.flutter.plugin.common.PluginRegistry
 import java.io.ByteArrayOutputStream
 
 /** FlutterDrawableMipmapPlugin */
-class FlutterDrawableMipmapPlugin(private val registrar: PluginRegistry.Registrar) : MethodCallHandler {
+class FlutterDrawableMipmapPlugin(private val registrar: PluginRegistry.Registrar) :
+    MethodCallHandler {
 
     companion object {
         @JvmStatic
@@ -33,9 +34,9 @@ class FlutterDrawableMipmapPlugin(private val registrar: PluginRegistry.Registra
             val name: String? = call.argument("name")
             val isDrawable: Boolean = call.argument("is_drawable") ?: false
             val id: Int = registrar.context().resources.getIdentifier(
-                    name,
-                    if (isDrawable) "drawable" else "mipmap",
-                    registrar.context().packageName
+                name,
+                if (isDrawable) "drawable" else "mipmap",
+                registrar.context().packageName
             )
             val drawable = ContextCompat.getDrawable(registrar.context(), id)
             val byteArray = if (drawable == null) ByteArray(0) else drawableToByteArray(drawable)
@@ -54,7 +55,8 @@ class FlutterDrawableMipmapPlugin(private val registrar: PluginRegistry.Registra
 
     private fun drawableToBitmap(drawable: Drawable): Bitmap {
         if (SDK_INT <= N_MR1) return (drawable as BitmapDrawable).bitmap
-        val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, ARGB_8888)
+        val bitmap =
+            Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, ARGB_8888)
         val canvas = Canvas(bitmap)
         drawable.setBounds(0, 0, canvas.width, canvas.height)
         drawable.draw(canvas)

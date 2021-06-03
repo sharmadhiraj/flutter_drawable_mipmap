@@ -16,7 +16,7 @@ abstract class _ImageWidget extends StatefulWidget {
 }
 
 class __ImageWidgetState extends State<_ImageWidget> {
-  Uint8List image;
+  Uint8List? image;
 
   @override
   void initState() {
@@ -25,19 +25,17 @@ class __ImageWidgetState extends State<_ImageWidget> {
   }
 
   Future<void> getDrawableMipmap() async {
-    FlutterDrawableMipmap.drawableMipmap(widget.name, widget.isDrawable())
-        .then((value) {
-      setState(() {
-        image = value;
-      });
-    }).catchError((err) {
-      print(err);
-    });
+    FlutterDrawableMipmap.drawableMipmap(
+      widget.name,
+      widget.isDrawable(),
+    )
+        .then((value) => setState(() => image = value))
+        .catchError((error) => print(error));
   }
 
   @override
   Widget build(BuildContext context) {
-    return image == null ? Container() : Image.memory(image);
+    return image == null ? Container() : Image.memory(image!);
   }
 }
 
