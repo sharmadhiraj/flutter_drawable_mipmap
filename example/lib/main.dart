@@ -8,30 +8,44 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Flutter Drawable Mipmap"),
-        ),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                Container(
-                  child: Drawable("android"),
-                  width: 200,
-                  height: 200,
-                ),
-                SizedBox(height: 20),
-                Container(
-                  child: Mipmap("ios"),
-                  width: 200,
-                  height: 200,
-                ),
-              ],
-            ),
-          ),
+        appBar: _buildAppBar(),
+        body: _buildBody(),
+      ),
+    );
+  }
+
+  AppBar _buildAppBar() {
+    return AppBar(title: const Text("Flutter Drawable Mipmap"));
+  }
+
+  Widget _buildBody() {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            _buildDrawable(),
+            SizedBox(height: 20),
+            _buildMipmap(),
+          ],
         ),
       ),
+    );
+  }
+
+  Widget _buildDrawable() {
+    return Container(
+      child: Drawable("android"),
+      width: 200,
+      height: 200,
+    );
+  }
+
+  Widget _buildMipmap() {
+    return Container(
+      child: Mipmap("ios"),
+      width: 200,
+      height: 200,
     );
   }
 }
