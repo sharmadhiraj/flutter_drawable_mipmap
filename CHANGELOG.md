@@ -1,3 +1,7 @@
+## 1.1.1
+
+* Internal improvements
+
 ## 1.1.0
 
 * Null Safety migration
