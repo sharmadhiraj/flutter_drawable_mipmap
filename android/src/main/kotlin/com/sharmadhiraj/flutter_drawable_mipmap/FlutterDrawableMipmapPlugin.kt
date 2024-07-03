@@ -2,6 +2,7 @@ package com.sharmadhiraj.flutter_drawable_mipmap
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Bitmap.CompressFormat
 import android.graphics.drawable.AdaptiveIconDrawable
 import android.graphics.drawable.BitmapDrawable
