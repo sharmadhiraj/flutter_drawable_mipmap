@@ -14,7 +14,8 @@ abstract class _ImageWidget extends StatefulWidget {
   bool isDrawable();
 
   /// Creates a new instance of [_ImageWidget] with the given [name].
-  _ImageWidget(this.name);
+  // ignore: unused_element_parameter
+  const _ImageWidget(this.name, {super.key});
 
   @override
   __ImageWidgetState createState() => __ImageWidgetState();
@@ -38,7 +39,7 @@ class __ImageWidgetState extends State<_ImageWidget> {
       widget.isDrawable(),
     )
         .then((value) => setState(() => image = value))
-        .catchError((error) => print(error));
+        .catchError((error) => debugPrint(error));
   }
 
   @override
@@ -50,7 +51,7 @@ class __ImageWidgetState extends State<_ImageWidget> {
 /// A widget for displaying drawable images loaded dynamically from resources.
 class Drawable extends _ImageWidget {
   /// Creates a new instance of [Drawable] with the given [name].
-  Drawable(String name) : super(name);
+  const Drawable(super.name, {super.key});
 
   @override
   bool isDrawable() => true;
@@ -59,7 +60,7 @@ class Drawable extends _ImageWidget {
 /// A widget for displaying mipmap images loaded dynamically from resources.
 class Mipmap extends _ImageWidget {
   /// Creates a new instance of [Mipmap] with the given [name].
-  Mipmap(String name) : super(name);
+  const Mipmap(super.name, {super.key});
 
   @override
   bool isDrawable() => false;

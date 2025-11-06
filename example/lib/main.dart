@@ -4,6 +4,8 @@ import 'package:flutter_drawable_mipmap/image_widget.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -34,18 +36,18 @@ class MyApp extends StatelessWidget {
   }
 
   Widget _buildDrawable() {
-    return Container(
-      child: Drawable("android"),
+    return SizedBox(
       width: 200,
       height: 200,
+      child: Drawable("android"),
     );
   }
 
   Widget _buildMipmap() {
-    return Container(
-      child: Mipmap("ios"),
+    return SizedBox(
       width: 200,
       height: 200,
+      child: Mipmap("ios"),
     );
   }
 }

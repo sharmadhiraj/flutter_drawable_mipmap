@@ -12,13 +12,13 @@ Android.
 
 #### Use this widget to show drawable in Flutter app
 
-```dart
+```
 Drawable("name")
 ```
 
 #### Use this widget to show mipmap in Flutter app
 
-```dart
+```
 Mipmap("name")
 ```
 
@@ -28,7 +28,7 @@ If you prefer accessing mipmap or drawable resources as memory (Uint8List) rathe
 allowing you to create custom widgets or perform other operations with the image data, you can use
 this method.
 
-```dart
+```
 Uint8List? image = await FlutterDrawableMipmap.drawableMipmap(
   "drawable_or_mipmap_name_without_R.id",
   Is_drawable, // true if drawable, false if mipmap

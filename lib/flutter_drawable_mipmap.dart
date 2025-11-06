@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 /// A Flutter plugin for accessing drawable and mipmap resources.
 class FlutterDrawableMipmap {
   static const MethodChannel _channel =
-      const MethodChannel("flutter_drawable_mipmap");
+      MethodChannel("flutter_drawable_mipmap");
 
   /// Retrieves the byte array of the drawable or mipmap with the given [name].
   ///
