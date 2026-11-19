@@ -15,7 +15,7 @@ class FlutterDrawableMipmap {
   /// Returns a [Uint8List] containing the byte array of the drawable or mipmap,
   /// or `null` if the resource is not found.
   static Future<Uint8List?> drawableMipmap(String name, bool isDrawable) async {
-    return await _channel.invokeMethod(
+    return _channel.invokeMethod(
       "drawableMipmap",
       {
         "name": name,
