@@ -1,3 +1,21 @@
+## 2.0.0
+
+* Add iOS support: asset catalog images, SF Symbols and app icon
+* Add `NativeImage` widget, `NativeImageProvider` and `NativeImageType`
+* Add system icons (`android.R.drawable`) and app icon on Android
+* Render vector, shape and all other drawables, not only bitmaps
+* Render at the requested size and device pixel ratio for sharp images
+* Add `width`, `height`, `fit`, `color`, `brightness`, `placeholder`, `errorBuilder` and
+  `semanticLabel`
+* Follow light and dark mode
+* Cache images with Flutter's `ImageCache`
+* Load images off the platform UI thread
+* Fix widget not reloading when its name changes
+* Fix calls never completing when the plugin is detached
+* Return `null` for missing images as documented
+* **Breaking:** require Dart 3.6 and Flutter 3.27
+* Deprecate `image_widget.dart` and `FlutterDrawableMipmap.drawableMipmap`
+
 ## 1.2.0
 
 * Support mipmap adaptive icon
