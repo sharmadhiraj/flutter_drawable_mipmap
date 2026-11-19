@@ -1,26 +1,8 @@
-import 'dart:async';
+/// Show native platform images in Flutter: Android drawables and mipmaps,
+/// iOS asset catalog images, system icons and the app icon.
+library;
 
-import 'package:flutter/services.dart';
-
-/// A Flutter plugin for accessing drawable and mipmap resources.
-class FlutterDrawableMipmap {
-  static const MethodChannel _channel =
-      MethodChannel("flutter_drawable_mipmap");
-
-  /// Retrieves the byte array of the drawable or mipmap with the given [name].
-  ///
-  /// The [isDrawable] parameter specifies whether the resource is a drawable
-  /// (`true`) or a mipmap (`false`).
-  ///
-  /// Returns a [Uint8List] containing the byte array of the drawable or mipmap,
-  /// or `null` if the resource is not found.
-  static Future<Uint8List?> drawableMipmap(String name, bool isDrawable) async {
-    return _channel.invokeMethod(
-      "drawableMipmap",
-      {
-        "name": name,
-        "is_drawable": isDrawable,
-      },
-    );
-  }
-}
+export 'src/native_image.dart';
+export 'src/native_image_loader.dart';
+export 'src/native_image_provider.dart';
+export 'src/native_image_type.dart';

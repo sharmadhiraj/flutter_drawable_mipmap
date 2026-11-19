@@ -1,11 +1,19 @@
 name: flutter_drawable_mipmap
-description: Flutter plugin that provides custom widget to show drawable and mipmap from android.
-version: 1.2.0
+description: Show native images in Flutter. Android drawables and mipmaps, iOS asset catalog images, system icons (SF Symbols) and the app icon.
+version: 2.0.0
 homepage: https://github.com/sharmadhiraj/flutter_drawable_mipmap
+repository: https://github.com/sharmadhiraj/flutter_drawable_mipmap
+issue_tracker: https://github.com/sharmadhiraj/flutter_drawable_mipmap/issues
+topics:
+  - image
+  - drawable
+  - icon
+  - sf-symbols
+  - native
 
 environment:
-  sdk: '>=2.19.0 <4.0.0'
-  flutter: ">=1.20.0"
+  sdk: ^3.6.0
+  flutter: ">=3.27.0"
 
 dependencies:
   flutter:
@@ -13,6 +21,8 @@ dependencies:
 
 dev_dependencies:
   flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter
 
 flutter:
   plugin:
@@ -20,3 +30,15 @@ flutter:
       android:
         package: com.sharmadhiraj.flutter_drawable_mipmap
         pluginClass: FlutterDrawableMipmapPlugin
+      ios:
+        pluginClass: FlutterDrawableMipmapPlugin
+
+screenshots:
+  - description: Android example, light mode.
+    path: screenshots/android_light.png
+  - description: Android example, dark mode.
+    path: screenshots/android_dark.png
+  - description: iOS example, light mode.
+    path: screenshots/ios_light.png
+  - description: iOS example, dark mode.
+    path: screenshots/ios_dark.png
