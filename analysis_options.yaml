@@ -20,7 +20,6 @@ linter:
     - prefer_int_literals
     - avoid_relative_lib_imports
     - unnecessary_breaks
-    - unnecessary_await_in_return
     - use_decorated_box
     - no_literal_bool_comparisons
     - use_colored_box
@@ -38,7 +37,6 @@ linter:
     - unnecessary_null_aware_operator_on_extension_on_nullable
     - prefer_constructors_over_static_methods
     - avoid_bool_literals_in_conditional_expressions
-    - use_if_null_to_convert_nulls_to_bools
     - use_named_constants
     - noop_primitive_operations
     - unnecessary_null_checks

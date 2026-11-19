@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_drawable_mipmap/flutter_drawable_mipmap.dart';
 
 import 'widgets/demo_section.dart';
@@ -72,7 +72,7 @@ class HomePage extends StatelessWidget {
       title: "Drawable",
       description: _isAndroid
           ? "res/drawable: bitmap, vector and shape. Toggle dark mode to see "
-              "values-night colors."
+                "values-night colors."
           : "Asset catalog image (Assets.xcassets).",
       children: [
         DemoTile(label: "$_platformImage.png", child: Drawable(_platformImage)),
@@ -138,11 +138,13 @@ class HomePage extends StatelessWidget {
 
   Widget _buildSizeAndTintSection() {
     final String name = _isAndroid ? "ic_star" : _starSymbol;
-    final NativeImageType type =
-        _isAndroid ? NativeImageType.drawable : NativeImageType.system;
+    final NativeImageType type = _isAndroid
+        ? NativeImageType.drawable
+        : NativeImageType.system;
     return DemoSection(
       title: "Size and tint",
-      description: "Rendered natively at the requested size, so vectors stay "
+      description:
+          "Rendered natively at the requested size, so vectors stay "
           "sharp. color tints the image.",
       children: [
         for (final double size in [16, 32, 64])
@@ -167,7 +169,8 @@ class HomePage extends StatelessWidget {
   Widget _buildProviderSection() {
     return DemoSection(
       title: "ImageProvider",
-      description: "NativeImageProvider works with CircleAvatar, "
+      description:
+          "NativeImageProvider works with CircleAvatar, "
           "DecorationImage and precacheImage.",
       children: [
         DemoTile(

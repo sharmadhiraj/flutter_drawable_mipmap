@@ -1,9 +1,11 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
+// ignore: deprecated_member_use
+import 'package:flutter/material.dart' as flutter_material;
 import 'package:flutter/services.dart';
 import 'package:flutter_drawable_mipmap/flutter_drawable_mipmap.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 const MethodChannel _channel = MethodChannel("flutter_drawable_mipmap");
 
@@ -113,6 +115,37 @@ void main() {
       expect(find.byType(Image), findsOneWidget);
       expect((calls.single.arguments as Map)["dark"], isTrue);
       expect(tester.takeException(), isNull);
+    });
+
+    testWidgets("passes flutter material theme brightness", (tester) async {
+      await tester.pumpWidget(
+        flutter_material.MaterialApp(
+          theme: flutter_material.ThemeData(brightness: Brightness.dark),
+          home: const Drawable("logo", width: 20, height: 20),
+        ),
+      );
+      await tester.runAsync(() => Future<void>.delayed(Duration.zero));
+      await tester.pump();
+
+      expect((calls.single.arguments as Map)["dark"], isTrue);
+    });
+
+    testWidgets("falls back to platform brightness", (tester) async {
+      tester.platformDispatcher.platformBrightnessTestValue = Brightness.dark;
+      addTearDown(tester.platformDispatcher.clearPlatformBrightnessTestValue);
+      await tester.pumpWidget(
+        MediaQuery.fromView(
+          view: tester.view,
+          child: const Directionality(
+            textDirection: TextDirection.ltr,
+            child: Drawable("logo", width: 20, height: 20),
+          ),
+        ),
+      );
+      await tester.runAsync(() => Future<void>.delayed(Duration.zero));
+      await tester.pump();
+
+      expect((calls.single.arguments as Map)["dark"], isTrue);
     });
 
     testWidgets("shows errorBuilder when missing", (tester) async {

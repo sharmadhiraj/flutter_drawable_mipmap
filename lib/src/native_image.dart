@@ -1,5 +1,8 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+// ignore: deprecated_member_use
+import 'package:flutter/material.dart' as flutter_material show Theme;
+import 'package:flutter/widgets.dart';
+import 'package:material_ui/material_ui.dart' as material_ui show Theme;
 
 import 'native_image_provider.dart';
 import 'native_image_type.dart';
@@ -7,7 +10,8 @@ import 'native_image_type.dart';
 /// Shows a native platform image.
 ///
 /// Images are cached, rendered at [width] x [height] (sharp for vectors), and
-/// follow the app [Theme] brightness unless [brightness] is set.
+/// follow the app theme brightness (or the platform's, without a theme) unless
+/// [brightness] is set.
 /// [color] tints the image. [placeholder] shows while loading and
 /// [errorBuilder] when the image is missing (defaults to empty space).
 class NativeImage extends StatelessWidget {
@@ -116,8 +120,19 @@ class NativeImage extends StatelessWidget {
       name,
       width: _finiteOrNull(width),
       height: _finiteOrNull(height),
-      brightness: brightness ?? Theme.of(context).brightness,
+      brightness: brightness ?? _themeBrightness(context),
     );
+  }
+
+  static Brightness _themeBrightness(BuildContext context) {
+    if (context.findAncestorWidgetOfExactType<material_ui.Theme>() != null) {
+      return material_ui.Theme.of(context).brightness;
+    }
+    if (context.findAncestorWidgetOfExactType<flutter_material.Theme>() !=
+        null) {
+      return flutter_material.Theme.of(context).brightness;
+    }
+    return MediaQuery.maybePlatformBrightnessOf(context) ?? Brightness.light;
   }
 
   Widget _buildFrame(

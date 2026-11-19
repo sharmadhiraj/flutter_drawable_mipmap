@@ -7,13 +7,13 @@
 * Render at the requested size and device pixel ratio for sharp images
 * Add `width`, `height`, `fit`, `color`, `brightness`, `placeholder`, `errorBuilder` and
   `semanticLabel`
-* Follow light and dark mode
+* Follow light and dark mode from Flutter material or `material_ui` themes, or the platform
 * Cache images with Flutter's `ImageCache`
 * Load images off the platform UI thread
 * Fix widget not reloading when its name changes
 * Fix calls never completing when the plugin is detached
 * Return `null` for missing images as documented
-* **Breaking:** require Dart 3.6 and Flutter 3.27
+* **Breaking:** require Dart 3.13 and Flutter 3.47
 * Deprecate `image_widget.dart` and `FlutterDrawableMipmap.drawableMipmap`
 
 ## 1.2.0

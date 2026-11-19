@@ -46,12 +46,9 @@ class NativeImageProvider extends ImageProvider<NativeImageKey> {
   }) : type = NativeImageType.system;
 
   /// The app's launcher icon.
-  const NativeImageProvider.appIcon({
-    this.width,
-    this.height,
-    this.brightness,
-  }) : type = NativeImageType.appIcon,
-       name = "";
+  const NativeImageProvider.appIcon({this.width, this.height, this.brightness})
+    : type = NativeImageType.appIcon,
+      name = "";
 
   final NativeImageType type;
   final String name;

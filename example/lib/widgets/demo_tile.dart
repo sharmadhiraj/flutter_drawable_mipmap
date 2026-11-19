@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class DemoTile extends StatelessWidget {
   const DemoTile({required this.label, required this.child, super.key});
