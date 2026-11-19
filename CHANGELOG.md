@@ -10,6 +10,7 @@
 * Follow light and dark mode from Flutter material or `material_ui` themes, or the platform
 * Cache images with Flutter's `ImageCache`
 * Load images off the platform UI thread
+* Migrate Android to built-in Kotlin
 * Fix widget not reloading when its name changes
 * Fix calls never completing when the plugin is detached
 * Return `null` for missing images as documented
