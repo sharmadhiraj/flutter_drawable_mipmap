@@ -1,53 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_drawable_mipmap/image_widget.dart';
 
-void main() => runApp(const MyApp());
+import 'home_page.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+void main() => runApp(const ExampleApp());
+
+class ExampleApp extends StatefulWidget {
+  const ExampleApp({super.key});
+
+  @override
+  State<ExampleApp> createState() => _ExampleAppState();
+}
+
+class _ExampleAppState extends State<ExampleApp> {
+  ThemeMode _themeMode = ThemeMode.light;
+
+  void _toggleTheme() {
+    setState(() {
+      _themeMode =
+          _themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: _buildAppBar(),
-        body: _buildBody(),
+      title: "Flutter Drawable Mipmap",
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(colorSchemeSeed: Colors.deepPurple),
+      darkTheme: ThemeData(
+        colorSchemeSeed: Colors.deepPurple,
+        brightness: Brightness.dark,
       ),
-    );
-  }
-
-  AppBar _buildAppBar() {
-    return AppBar(title: const Text("Flutter Drawable Mipmap"));
-  }
-
-  Widget _buildBody() {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            _buildDrawable(),
-            const SizedBox(height: 20),
-            _buildMipmap(),
-          ],
-        ),
+      themeMode: _themeMode,
+      home: HomePage(
+        isDark: _themeMode == ThemeMode.dark,
+        onToggleTheme: _toggleTheme,
       ),
-    );
-  }
-
-  Widget _buildDrawable() {
-    return const SizedBox(
-      width: 200,
-      height: 200,
-      child: Drawable("android"),
-    );
-  }
-
-  Widget _buildMipmap() {
-    return const SizedBox(
-      width: 200,
-      height: 200,
-      child: Mipmap("ios"),
     );
   }
 }
